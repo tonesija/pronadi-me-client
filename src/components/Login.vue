@@ -55,6 +55,12 @@ export default {
   },
   async created () {
     this.eggCode = this.$route.query.code
+
+    if(this.$store.state.isUserLoggedIn){
+      this.$router.push('/claim/?code=' + this.eggCode)
+      return
+    }
+
     try {
         await AuthenticationService.authenticateEgg({eggCode: this.eggCode})
     } catch (err) {
