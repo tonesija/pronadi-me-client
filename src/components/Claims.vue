@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h3>Vaši pronalazci, {{$store.state.user.username}}</h3>
+      <h3>Vaši pronalasci, {{$store.state.user.username}}</h3>
 
 
         <div v-for="egg in eggs" v-bind:key="egg.id">
@@ -53,14 +53,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import '../assets/style.scss';
     .egg-text{
-        color: red;
+        color: $danger;
         font-weight: bold;
         font-size: 24px;
     }
     .found-text{
-        color:green;
+        color:$success;
         font-weight: 600;
         font-size: 18px;
     }

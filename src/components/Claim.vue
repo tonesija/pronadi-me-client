@@ -34,6 +34,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import '../assets/style.scss';
+
+  h2, h3 {
+    color: $primary;
+  }
 
 </style>
