@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainframe">
       <h3>Vaši pronalasci, {{$store.state.user.username}}</h3>
 
 

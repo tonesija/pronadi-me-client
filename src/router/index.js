@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '../components/Index'
 import Login from '../components/Login'
+import LoginNormal from '../components/LoginNormal'
 import Register from '../components/Register'
 import Claim from '../components/Claim'
 import Claims from '../components/Claims'
@@ -20,6 +21,11 @@ Vue.use(VueRouter)
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/login$',
+    name: 'LoginNormal',
+    component: LoginNormal
   },
   {
     path: '/register',
