@@ -1,25 +1,25 @@
 <template>
-  <div v-if="loaded">
-    <div v-if="!codeError">
-      <h1>Čestitam</h1>
-      <h2>Kod jajta je: {{ eggCode }}</h2>
-      <h3>Prijavi se za registriranje jajeta</h3>
+  <div v-if="loaded" class="mainframe">
+    <div>
+      <h1 class="title" v-show="!codeError">Čestitam</h1>
+      <h2 class="title" v-show="!codeError">Kod je:&emsp;<span class="egg-name">{{ eggCode }}</span></h2>
+      <h3 class="title" v-show="!codeError">Prijavi se za registriranje koda</h3>
+      <h1 class="title" v-show="codeError">Prijavite se</h1>
 
-      <input type="username" 
+      <input class="input" type="username" 
       v-model="username" 
       placeholder="korisničko ime ili email">
       <br>
-      <input type="password" 
+      <input class="input" type="password" 
       v-model="password" 
       placeholder="lozinka">
       <br>
-      <button @click="sendLoginWithEgg">Pošalji</button>
-      <p>Nemaš račun, <router-link :to="'/register/?code=' + eggCode">registriraj se</router-link></p>
+      <button class="button" @click="sendLoginWithEgg">Pošalji</button>
+      <p class="text">Nemaš račun? <router-link :to="'/register/?code=' + eggCode">Registriraj se</router-link></p>
 
     </div>
     
-    <h2 v-if="codeError">Neispravan kod</h2>
-    <h4 v-if="error">{{error}}</h4>
+    <h4 class="error" v-if="error">{{error}}</h4>
   </div>
 </template>
 
@@ -45,12 +45,20 @@ export default {
               username: this.username,
               password: this.password
             })
+
             this.$store.dispatch('setUser', res.data.user)
-            this.$router.push('/claim/?code=' + this.eggCode)
+
+            if(this.eggCode){
+              this.$router.push('/claim/?code=' + this.eggCode)
+            } else {
+              this.$router.push('/claims')
+            }
+            
+            return
           } catch(err) {
               this.error = err.response.data.error
+              return
           }
-          
       }
   },
   async created () {

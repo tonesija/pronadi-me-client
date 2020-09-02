@@ -1,26 +1,25 @@
 <template>
-  <div v-if="loaded">
-      <div v-if="!codeError">
-        <h3>Registracija</h3>
+  <div v-if="loaded" class="mainframe">
+      <div>
+        <h1 class="title">Registracija</h1>
 
-        <input type="username" 
+        <input class="input" type="username" 
         v-model="username" 
         placeholder="korisničko ime">
         <br>
-        <input type="email" 
+        <input class="input" type="email" 
         v-model="email" 
         placeholder="email">
         <br>
-        <input type="password" 
+        <input class="input" type="password" 
         v-model="password" 
         placeholder="lozinka">
         <br>
         
-        <button @click="register">Pošalji</button>
+        <button class="button" @click="register">Pošalji</button>
       </div>
 
-    <h2 v-if="codeError">Neispravan kod</h2>
-    <h4 v-if="error">{{error}}</h4>
+      <h4 class="error" v-if="error">{{error}}</h4>
 
     </div>
     
@@ -37,7 +36,8 @@ export default {
         password: null,
         error: null,
         codeError: null,
-        loaded: false
+        loaded: false,
+        toClaims: false
     }
   },
   methods: {
@@ -50,7 +50,11 @@ export default {
               password: this.password
             })
             this.$store.dispatch('setUser', res.data.user)
-            this.$router.push('/claim/?code=' + this.$route.query.code)
+            if(this.toClaims){
+              this.$router.push('/claims') 
+            } else {
+              this.$router.push('/claim/?code=' + this.$route.query.code)
+            }
           } catch(err) {
               this.error = err.response.data.error
           }
@@ -58,6 +62,12 @@ export default {
   },
   async created () {
     this.eggCode = this.$route.query.code
+    if(!this.eggCode){
+      this.toClaims = true
+      this.loaded = true
+      console.log('no egg code')
+      return
+    }
     try {
         await AuthenticationService.authenticateEgg({eggCode: this.eggCode})
     } catch (err) {

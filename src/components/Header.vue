@@ -2,6 +2,8 @@
     <header>
         <router-link to="/" class="header-item"><img class="logo" src="../assets/pronadime-logo.png"></router-link>
         
+        <h4 class="header-text" v-show="loggingOutText">{{loggingOutText}}</h4>
+
         <h3 class="header-item-end">
           <router-link
           v-if="$store.state.isUserLoggedIn" 
@@ -14,19 +16,13 @@
         <router-link 
           v-if="!$store.state.isUserLoggedIn" 
           class="header-item-end"
-          to="/login$">
+          to="/login">
           <img class="lock-logo" src="../assets/lock-icon.png">
         </router-link>
-
         </div>
 
-        <div @click="logout">
-          <router-link 
-          v-if="$store.state.isUserLoggedIn" 
-          class="header-item"
-          to="/"> 
+        <div class="header-item img-button" @click="logout" v-if="$store.state.isUserLoggedIn"> 
           <img class="lock-logo"  src="../assets/lock-icon.png">
-          </router-link>
         </div>
         
     </header>
@@ -36,12 +32,17 @@
 export default {
   data () {
     return {
+      loggingOutText: null
     }
   },
   methods: {  
-    async logout () {
-        console.log('logging out')
-      this.$store.dispatch('setUser', null)
+    logout () {
+      this.loggingOutText = 'Odjavljujem se...'
+      setTimeout(() => {
+        this.$store.dispatch('setUser', null)
+        this.loggingOutText = null
+        this.$router.push('/')
+      }, 300)  
     }
   }
 }
@@ -83,7 +84,7 @@ export default {
         list-style: none;
         overflow-y: auto;
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
         background-color: $quinary;
     }
@@ -111,7 +112,6 @@ export default {
       font-size: 18px;
     }
 
-.router-link-exact-active{
-    color: $secondary;
-}
+
+
 </style>

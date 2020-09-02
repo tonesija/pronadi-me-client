@@ -1,12 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '../components/Index'
-import Login from '../components/Login'
-import LoginNormal from '../components/LoginNormal'
-import Register from '../components/Register'
-import Claim from '../components/Claim'
-import Claims from '../components/Claims'
-
 
 
 Vue.use(VueRouter)
@@ -15,32 +8,28 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Index',
-    component: Index
+    component: resolve => require(['@/components/Index'],resolve)
+
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
-  },
-  {
-    path: '/login$',
-    name: 'LoginNormal',
-    component: LoginNormal
+    component: resolve => require(['@/components/Login'],resolve)
   },
   {
     path: '/register',
     name: 'Register',
-    component: Register
+    component: resolve => require(['@/components/Register'],resolve)
   },
   {
     path: '/claim',
     name: 'Claim',
-    component: Claim
+    component: resolve => require(['@/components/Claim'],resolve)
   },
   {
     path: '/claims',
     name: 'Claims',
-    component: Claims
+    component: resolve => require(['@/components/Claims'],resolve)
   }
 ]
 

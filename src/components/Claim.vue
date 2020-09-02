@@ -1,10 +1,14 @@
 <template>
-  <div>
-      <h3>Vaš pronalazak je zabilježen {{$store.state.user.username}}</h3>
+  <div class="mainframe" v-if="loaded">
+      <div v-if="!error">
+        <h3>Vaš pronalazak je zabilježen {{$store.state.user.username}}</h3>
 
-      <h2 v-if="egg">{{egg.name}}</h2>
+        <h2 v-if="egg">{{egg.name}}</h2>
 
-      <router-link to="/claims">Pogledaj svoje pronalaske</router-link>
+        <router-link to="/claims">Pogledaj svoje pronalaske</router-link>
+      </div>
+
+      <h3 class="error" v-if="error">{{error}}</h3>
 
     </div>
     
@@ -18,18 +22,31 @@ import FindingService from '@/services/FindingService'
 export default {
   data () {
     return {
-      egg: null
+      egg: null,
+      error: null,
+      loaded: false
     }
   },
   methods: {  
       
   },
   async created () {
-    EggService.getEggByCode({password: this.$route.query.code})
-    .then(res => {
+    if(!this.$store.state.isUserLoggedIn){
+      this.$router.push('/login/?code=' + this.$route.query.code)
+      return
+    }
+    try {
+      let res = await EggService.getEggByCode({password: this.$route.query.code})
       this.egg = res.data.egg
-      FindingService.addFinding({userID: this.$store.state.user.id, eggCode: this.egg.password})
-    })
+      //dodaj finding u bazu
+      
+      await FindingService.addFinding({userID: this.$store.state.user.id, eggID: this.egg.id})
+      this.loaded = true
+    } catch (err) {
+      this.error = err.response.data.error
+      this.loaded = true
+    }
+
   }
 }
 </script>
@@ -37,8 +54,9 @@ export default {
 <style scoped lang="scss">
   @import '../assets/style.scss';
 
-  h2, h3 {
-    color: $primary;
+  .error {
+    color: $quaternary;
+    font-size: 21px;
   }
 
 </style>

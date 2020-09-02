@@ -6,5 +6,9 @@ export default {
   },
   getAllEggs () {
     return Api().get('getEggs')
+  },
+  getHint (data){
+    console.log(data)
+    return Api().post('getHint', data)
   }
 }

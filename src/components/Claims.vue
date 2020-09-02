@@ -5,8 +5,19 @@
 
         <div v-for="egg in eggs" v-bind:key="egg.id">
             <span class="egg-text">{{egg.name}} </span>
-            <span class="found-text" v-show="getFound(egg.password)"> Found</span>
+            <span class="found-text" v-show="egg.found"> Found</span>
         </div>
+
+        <div v-show="!collectedAll">
+            <h4>Hint za sljedeće jaje: </h4>
+
+            <p>{{hint}}</p>
+        </div>
+        <div v-show="collectedAll">
+            <h4>Čestitamo skupija si ih sve!</h4>
+        </div>
+
+        <h3 v-if="error">{{error}}</h3>
 
     </div>
     
@@ -22,19 +33,28 @@ export default {
     return {
       eggs: [],
       error: null,
-      findings: []
+      findings: [],
+      hint: null,
+      collectedAll: false
     }
   },
   methods: {
-      getFound(eggID) {
-          console.log('eggID: ' +eggID)
-          for(let finding of this.findings){
-              console.log(finding)
-              if(finding.eggID === eggID){
-                  return true
+      calculateFound () {
+          for(let egg of this.eggs){
+              for(let finding of this.findings){
+                  if(egg.id === finding.eggID){
+                      egg.found = true
+                      break
+                  }
               }
           }
-          return false
+      },
+      calculateEggIDForHint () {
+          for(let egg of this.eggs){
+              if(!egg.found){
+                  return egg.id
+              }
+          }
       }
   },
   created () {
@@ -44,7 +64,24 @@ export default {
               FindingService.getFindingsByUserID({userID: this.$store.state.user.id}).then(
                   res => {
                       this.findings = res.data.findings
+                      console.log(this.findings.length + ' ' +this.eggs.length)
+                      this.calculateFound()
+                      if(this.findings.length == this.eggs.length) {
+                          this.collectedAll = true
+                          console.log('coll all true')
+                          return
+                      }
+
+
                       
+                      EggService.getHint({eggID: this.calculateEggIDForHint()})
+                      .then(res =>{
+                          this.hint = res.data.hint
+                          
+                      })
+                      .catch(err => {
+                          this.error = err.response.data.error
+                      })
                   }
               )
           }

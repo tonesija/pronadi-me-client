@@ -1,18 +1,21 @@
 <template>
   <div class="mainframe">
     <div>
-
-      <input type="username" 
+      <h2 class="title">Prijavi se</h2>
+       
+      <input class="input" type="username" 
       v-model="username" 
-      placeholder="korisničko ime ili email">
+      placeholder="Korisničko ime ili e-mail">
       <br>
-      <input type="password" 
+      <input class="input" type="password" 
       v-model="password" 
-      placeholder="lozinka">
+      placeholder="Lozinka">
       <br>
-      <button @click="login">Pošalji</button>
+      <button class="button" @click="login">Pošalji</button>
 
     </div>
+    
+    <p>Nemaš račun, <router-link to="/register">registriraj se</router-link></p>
     
     <h4 v-if="error">{{error}}</h4>
   </div>
@@ -41,6 +44,7 @@ export default {
             this.$router.push('/claim/?code=' + this.eggCode)
           } catch(err) {
               this.error = err.response.data.error
+              return
           }
 
           this.$router.push('/claims')
