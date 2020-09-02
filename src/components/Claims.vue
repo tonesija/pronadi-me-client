@@ -48,6 +48,7 @@ export default {
                   }
               }
           }
+          this.$forceUpdate();
       },
       calculateEggIDForHint () {
           for(let egg of this.eggs){

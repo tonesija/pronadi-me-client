@@ -15,7 +15,11 @@
       placeholder="lozinka">
       <br>
       <button class="button" @click="sendLoginWithEgg">Pošalji</button>
-      <p class="text">Nemaš račun? <router-link :to="'/register/?code=' + eggCode">Registriraj se</router-link></p>
+      
+      <p class="text">Nemaš račun? 
+        <router-link v-if="eggCode" :to="'/register/?code=' + eggCode">Registriraj se</router-link>
+        <router-link v-if="!eggCode" to="/register">Registriraj se</router-link>
+      </p>
 
     </div>
     
