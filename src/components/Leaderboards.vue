@@ -1,6 +1,6 @@
 <template>
     <div class="mainframe">
-    <h1 class="title">Leaderboard</h1>
+    <h1 class="title">Poredak</h1>
 
 
     
@@ -72,10 +72,13 @@ export default {
 	var sSecond = sqlDateArr4[0];
     var sMillisecond = sqlDateArr4[1]; 
     return new Date(sYear,sMonth,sDay,sHour,sMinute,sSecond,sMillisecond);
-	}
+    },
+    async getUsers () {
+        this.users = (await LeaderboardsService.getUsers()).data.users
+    }
   },
   async created () {
-      this.users = (await LeaderboardsService.getUsers()).data.users
+      this.getUsers()
   }
   
 }
