@@ -1,11 +1,13 @@
 <template>
   <div class="mainframe" v-if="loaded">
-      <div v-if="!error">
-        <h3>Vaš pronalazak je zabilježen {{$store.state.user.username}}</h3>
+      <div v-if="!error" class="container">
+        <h2 class="title">Vaš pronalazak je zabilježen</h2>
 
-        <h2 v-if="egg">{{egg.name}}</h2>
+        <p class="egg-name text" v-if="egg">{{egg.name}}</p>
 
-        <router-link to="/claims">Pogledaj svoje pronalaske</router-link>
+       
+        <router-link to="/claims"><h4 class="link">Pogledaj svoje pronalaske</h4></router-link>
+     
       </div>
 
       <h3 class="error" v-if="error">{{error}}</h3>
@@ -57,6 +59,31 @@ export default {
   .error {
     color: $quaternary;
     font-size: 21px;
+  }
+
+  .mainframe{
+    padding-top: 20px;
+    padding-bottom: 10px ;
+  }
+    .container{
+    display: flex;
+    flex-direction: column;
+        align-items: center;
+  }
+
+  .link {
+    color: $quaternary;
+  }
+
+  .egg-name {
+    color: $secondary;
+    background-color: $quinary;
+    border: 5px solid $quinary;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 22px;
+    font-weight: bold;
+     width: fit-content;
   }
 
 </style>

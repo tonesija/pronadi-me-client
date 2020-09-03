@@ -46,7 +46,7 @@ export default {
           try {
             const res = await AuthenticationService.register({
               username: this.username,
-              email: this.email,
+              email: this.email.toLowerCase(),
               password: this.password
             })
             this.$store.dispatch('setUser', res.data.user)

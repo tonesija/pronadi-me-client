@@ -43,13 +43,23 @@ export default {
 
 
 .mainframe {
-  width: 100%;
+  width: 80%;
   background-color: transparent;
   margin-top: $header-height;
   display: flex;
   flex-flow: column;
   align-items: center;
+  background-color: $secondary;
 
+  margin-left: 10%;
+  margin-right: 10%;
+  
+
+}
+
+body {
+  background-image: url('./assets/bg-for-text2.png');
+  background-size: 100%;
 }
 
 
@@ -72,11 +82,6 @@ export default {
 .header-text{
   color: $secondary;
   font-size: 10px;
-}
-
-.egg-name {
-  color: $quaternary;
-  margin-left: 4px;
 }
 
   .button{
@@ -103,6 +108,7 @@ export default {
     
   }
   .input:focus {
+    outline: none;
     border-color: transparentize($color: $primary, $amount: 0.7);
   }
   .img-button:active{

@@ -8,7 +8,7 @@
           <router-link
           v-if="$store.state.isUserLoggedIn" 
           to="/claims">
-          <h3 class="username">{{$store.state.user.username}}</h3>
+          <h3 class="username" v-html="username"></h3>
           </router-link>
         </h3>
         
@@ -43,6 +43,11 @@ export default {
         this.loggingOutText = null
         this.$router.push('/')
       }, 300)  
+    }
+  },
+  computed: {
+    username () {
+      return this.$store.state.user.username.replace(/_/g, '&nbsp;')
     }
   }
 }

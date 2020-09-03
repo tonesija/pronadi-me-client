@@ -1,21 +1,37 @@
 <template>
-  <div class="mainframe">
-      <h3>Vaši pronalasci, {{$store.state.user.username}}</h3>
+  <div v-if="$store.state.user" class="mainframe">
+      <h2 class="title">Vaši pronalasci:</h2>
+
+        <table class="egg-box">
+            <tr class="egg-container" v-for="egg in eggs" v-bind:key="egg.id">
+                <td class="egg-text ">
+                    {{egg.name}}
+                </td>
+                <td  class="found-icon" v-if="egg.found == 2">
+                    <img class="found-icon-img" src="../assets/kvacica.png" width="25">
+                </td>
+                <td class="found-icon" v-if="egg.found == 1">
+                    <img class="found-icon-img" src="../assets/iks.png" width="25">
+                </td>
+            </tr>
+        </table>
+        
 
 
-        <div v-for="egg in eggs" v-bind:key="egg.id">
-            <span class="egg-text">{{egg.name}} </span>
-            <span class="found-text" v-show="egg.found"> Found</span>
-        </div>
 
-        <div v-show="!collectedAll">
-            <h4>Hint za sljedeće jaje: </h4>
+      
+        <p v-show="!collectedAll"
+        class="hint text">
+        {{hint}}
+        </p>
+       
+       
+        <h4 class="congratulations-text text"
+         v-show="collectedAll">
+         Čestitamo skupija si ih sve!
+        </h4>
+        
 
-            <p>{{hint}}</p>
-        </div>
-        <div v-show="collectedAll">
-            <h4>Čestitamo skupija si ih sve!</h4>
-        </div>
 
         <h3 v-if="error">{{error}}</h3>
 
@@ -41,9 +57,10 @@ export default {
   methods: {
       calculateFound () {
           for(let egg of this.eggs){
+              egg.found = 1
               for(let finding of this.findings){
                   if(egg.id === finding.eggID){
-                      egg.found = true
+                      egg.found = 2
                       break
                   }
               }
@@ -52,13 +69,18 @@ export default {
       },
       calculateEggIDForHint () {
           for(let egg of this.eggs){
-              if(!egg.found){
+              if(egg.found == 1){
                   return egg.id
               }
           }
       }
   },
   created () {
+      if(!this.$store.state.isUserLoggedIn){
+          this.$router.push('/login')
+          return
+      }
+
       EggService.getAllEggs().then(
           res => {
               this.eggs = res.data.eggs
@@ -94,13 +116,36 @@ export default {
 <style scoped lang="scss">
   @import '../assets/style.scss';
     .egg-text{
-        color: $danger;
+        text-align: left;
+        color: $quinary;
         font-weight: bold;
-        font-size: 24px;
+        font-size: 20px;
+        font-family: $sans-serif-font;
     }
-    .found-text{
-        color:$success;
-        font-weight: 600;
-        font-size: 18px;
+    
+    .found-icon{
+        padding: 0;
+        padding-left: 25px;
+        margin: 0;
+        vertical-align: middle;
+    }
+    .found-icon-img{
+        display:block;
+    }
+    .egg-box {
+      
+    }
+    .egg-container {
+        
+    }
+    .hint {
+        max-width: 90%;
+        word-break: break-all;
+    }
+    .congratulations-text {
+
+    }
+    .title {
+        padding-top: 20px;
     }
 </style>

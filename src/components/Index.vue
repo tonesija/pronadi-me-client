@@ -92,9 +92,7 @@ export default {
     display: flex;
     flex-flow: column;
     align-items: center;
-    background-image: url("../assets/bg-for-text2.png");
-    background-size: 100%;
-    background-repeat: repeat-y;
+    height: calc(100vh - $header-height);
   }
 
  

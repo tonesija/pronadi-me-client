@@ -30,6 +30,11 @@ Vue.use(VueRouter)
     path: '/claims',
     name: 'Claims',
     component: resolve => require(['@/components/Claims'],resolve)
+  },
+  {
+    path: '/leaderboard',
+    name: 'Leaderboard',
+    component: resolve => require(['@/components/Leaderboards'],resolve)
   }
 ]
 
