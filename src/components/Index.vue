@@ -23,7 +23,6 @@
     
 
 
-
   </div>
   
 </template>
@@ -45,6 +44,8 @@ export default {
       adminToolsEnabled: false
     }
   }, 
+  components: {
+  },
   methods: {
     async login () {
           this.error = null
@@ -83,6 +84,8 @@ export default {
     background-color: $secondary;
     margin-top: 20px;
     padding: 0px 20px;
+    background-color: $tertiary;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   }
 
   .mainframe-index {
@@ -93,6 +96,7 @@ export default {
     flex-flow: column;
     align-items: center;
     height: calc(100vh - $header-height);
+    
   }
 
  

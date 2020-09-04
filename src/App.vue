@@ -20,9 +20,7 @@ export default {
   @import 'assets/style.scss';
   @import url('https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@700&family=Roboto:wght@500&display=swap');
 
-@media screen and (min-width: 700px){
-  
-}
+
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -49,17 +47,20 @@ export default {
   display: flex;
   flex-flow: column;
   align-items: center;
-  background-color: $secondary;
+  background-color: $tertiary;
 
   margin-left: 10%;
   margin-right: 10%;
   
-
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 body {
-  background-image: url('./assets/bg-for-text2.png');
+  //background-image: url('./assets/bg-for-text2.png');
   background-size: 100%;
+  background-color: darken($color: $secondary, $amount: 2);
+  margin-left: 0; 
+  margin-right: 0;
 }
 
 
@@ -106,6 +107,9 @@ body {
     margin: 0;
     padding: 10px;
     
+  }
+  input:-webkit-autofill {
+   -webkit-box-shadow: 0 0 0px 1000px transparentize($color: $primary, $amount: 0.4) inset;
   }
   .input:focus {
     outline: none;

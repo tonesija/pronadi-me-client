@@ -72,12 +72,14 @@ export default {
   }
 
   .link {
-    color: $quaternary;
+    color: $quinary;
+    font-size: 18px;
+    border-bottom: 2px solid $quinary;
   }
 
   .egg-name {
-    color: $secondary;
-    background-color: $quinary;
+    color: $quinary;
+    background-color: $primary;
     border: 5px solid $quinary;
     border-radius: 12px;
     padding: 10px 20px;

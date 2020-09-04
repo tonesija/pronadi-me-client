@@ -1,8 +1,8 @@
 <template>
   <div v-if="loaded" class="mainframe">
     <div>
-      <h1 class="title" v-show="!codeError">Čestitam</h1>
-      <h2 class="title" v-show="!codeError">Kod je:&emsp;<span class="egg-name">{{ eggCode }}</span></h2>
+      <h1 class="title" v-show="!codeError">~Čestitamo~</h1>
+      <h2 class="title" v-show="!codeError">Pronašli ste kod</h2>
       <h3 class="title" v-show="!codeError">Prijavi se za registriranje koda</h3>
       <h1 class="title" v-show="codeError">Prijavite se</h1>
 
