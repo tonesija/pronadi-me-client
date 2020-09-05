@@ -7,11 +7,24 @@
 
 <script>
 import Header from './components/Header'
+import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
   name: 'App',
   components: {
     Header
+  },
+  async created () {
+    console.log('APP CREATED')
+    try {
+      let token = localStorage.getItem("token")
+      let user = (await AuthenticationService.automaticLogIn({token: token})).data.user
+      console.log(user)
+      this.$store.dispatch('setUser', user)
+      this.$store.dispatch('setToken', token)
+    } catch (err) {
+      console.log('err kod automatic login')
+    }
   }
 }
 </script>
@@ -53,15 +66,32 @@ export default {
   margin-right: 10%;
   
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 body {
-  //background-image: url('./assets/bg-for-text2.png');
-  background-size: 100%;
-  background-color: darken($color: $secondary, $amount: 2);
+  background-image: url('./assets/bg-for-text2.png');
+  background-position-x: center;
+  background-size: 180%;
+  //background-color: darken($color: $secondary, $amount: 2);
   margin-left: 0; 
   margin-right: 0;
 }
+
+  @media screen and (min-width: 700px){
+    body {
+      background-size: 50%;
+    }
+  }
+
+
+  @media screen and (min-width: 1100px){
+    body {
+      background-size: 20%;
+    }
+  }
 
 
 
@@ -86,6 +116,7 @@ body {
 }
 
   .button{
+    outline: none;
     font-family: $sans-serif-font;
     font-size: 18px;
     background-color: $primary;

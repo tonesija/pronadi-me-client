@@ -35,8 +35,8 @@ export default {
     return {
         loaded: false,
         eggCode: null,
-        username: null,
-        password: null,
+        username: '',
+        password: '',
         error: null,
         codeError: null
     }
@@ -51,6 +51,7 @@ export default {
             })
 
             this.$store.dispatch('setUser', res.data.user)
+            this.$store.dispatch('setToken', res.data.token)
 
             if(this.eggCode){
               this.$router.push('/claim/?code=' + this.eggCode)
@@ -67,6 +68,11 @@ export default {
   },
   async created () {
     this.eggCode = this.$route.query.code
+
+    if(!this.eggCode && this.$store.state.isUserLoggedIn){
+      this.$router.push('/claims')
+      return
+    }
 
     if(this.$store.state.isUserLoggedIn){
       this.$router.push('/claim/?code=' + this.eggCode)

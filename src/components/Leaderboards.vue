@@ -165,12 +165,6 @@ export default {
 
   }
 
-
-
-  .mainframe {
-      padding-top: 10px;
-      padding-bottom: 10px;
-  }
     @media screen and (max-height: 400px){
    .mainframe {
       height: fit-content;

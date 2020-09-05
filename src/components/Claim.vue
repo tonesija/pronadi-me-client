@@ -33,16 +33,23 @@ export default {
       
   },
   async created () {
+    let code = this.$route.query.code
+    if(!code){
+      this.$router.push('/claims')
+      return
+    }
     if(!this.$store.state.isUserLoggedIn){
-      this.$router.push('/login/?code=' + this.$route.query.code)
+      this.$router.push('/login/?code=' + code)
       return
     }
     try {
       let res = await EggService.getEggByCode({password: this.$route.query.code})
       this.egg = res.data.egg
+
+
       //dodaj finding u bazu
-      
-      await FindingService.addFinding({userID: this.$store.state.user.id, eggID: this.egg.id})
+      await FindingService.addFinding({userID: this.$store.state.user.id,
+           eggID: this.egg.id, token: this.$store.state.token})
       this.loaded = true
     } catch (err) {
       this.error = err.response.data.error

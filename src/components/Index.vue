@@ -1,12 +1,12 @@
 <template>
-  <div class="mainframe-index">
+  <div class="mainframe">
 
-    <div class="main-text-window">
+
       <h1 class="title">PRONAĐI ME</h1>
       <p class="text">
       Lorem ipsum dolor sit amet consectetur, adipisicing elor sit amet consectetur, adipisicing elit. Offor sit amet consectetur, adipisicing elit. Offor sit amet consectetur, adipisicipisicing elit. Offit. Officiis, corrupti! Sapiente nihil possimus consequuntur porro dolores fugit error vitae nobis autem cupiditate quisquam, sit deleniti perspiciatis, inventore maiores delectus atque!
       </p>
-    </div>
+
 
     <button @click="showAdminTools">Show admin tools</button>
     <div v-if="adminToolsEnabled">
@@ -76,27 +76,10 @@ export default {
   @import '../assets/style.scss';
   @import url('https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@700&family=Roboto:wght@500&display=swap');
 
-  .main-text-window {
-    margin-left: 25%;
-    margin-right: 25%;
-    font-size: 18px;
-    width: 60vw;
-    background-color: $secondary;
-    margin-top: 20px;
-    padding: 0px 20px;
-    background-color: $tertiary;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  }
 
-  .mainframe-index {
-    width: 100%;
-    background-color: transparent;
-    margin-top: $header-height;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    height: calc(100vh - $header-height);
-    
+  .text {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
  

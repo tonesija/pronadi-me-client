@@ -31,9 +31,9 @@ import AuthenticationService from '@/services/AuthenticationService'
 export default {
   data () {
     return {
-        username: null,
-        email: null,
-        password: null,
+        username: '',
+        email: '',
+        password: '',
         error: null,
         codeError: null,
         loaded: false,
@@ -49,7 +49,10 @@ export default {
               email: this.email.toLowerCase(),
               password: this.password
             })
+
             this.$store.dispatch('setUser', res.data.user)
+            this.$store.dispatch('setToken', res.data.token)
+
             if(this.toClaims){
               this.$router.push('/claims') 
             } else {

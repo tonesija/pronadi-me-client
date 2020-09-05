@@ -9,5 +9,9 @@ export default {
   },
   register (data) {
     return Api().post('register', data)
+  },
+  automaticLogIn (data) {
+    console.log('saljem token')
+    return Api().post('automaticLogin', data)
   }
 }

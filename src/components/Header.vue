@@ -63,6 +63,7 @@ export default {
       this.loggingOutText = 'Odjavljujem se...'
       setTimeout(() => {
         this.$store.dispatch('setUser', null)
+        this.$store.dispatch('setToken', null)
         this.loggingOutText = null
         this.$router.push('/')
       }, 300)  
