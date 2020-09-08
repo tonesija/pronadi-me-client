@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header></Header>
-    <router-view/>
+    <router-view :key="$route.name + ($route.query.code || '')"/>
   </div>
 </template>
 
@@ -23,9 +23,10 @@ export default {
       this.$store.dispatch('setUser', user)
       this.$store.dispatch('setToken', token)
     } catch (err) {
-      console.log('err kod automatic login')
+      console.log(err)
     }
-  }
+
+  } 
 }
 </script>
 

@@ -35,6 +35,16 @@ Vue.use(VueRouter)
     path: '/leaderboard',
     name: 'Leaderboard',
     component: resolve => require(['@/components/Leaderboards'],resolve)
+  },
+  {
+    path: '/recovery',
+    name: 'Recovery',
+    component: resolve => require(['@/components/Recovery'],resolve)
+  },
+  {
+    path: '/newPassword',
+    name: 'NewPassword',
+    component: resolve => require(['@/components/NewPassword'],resolve)
   }
 ]
 

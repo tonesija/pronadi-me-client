@@ -1,6 +1,6 @@
 <template>
   <div v-if="$store.state.user" class="mainframe">
-      <h2 class="title">Vaši pronalasci:</h2>
+      <h1 class="title">Vaši pronalasci:</h1>
 
         <table class="egg-box">
             <tr class="egg-container" v-for="egg in eggs" v-bind:key="egg.id">
@@ -145,7 +145,5 @@ export default {
     .congratulations-text {
 
     }
-    .title {
-        padding-top: 20px;
-    }
+    
 </style>

@@ -17,7 +17,7 @@
                         {{users[i-1].count}}
                     </span>
                 </td>
-                <td>
+                <td class="date">
                     {{formatDate(users[i-1].last)}}
                 </td>
             </tr>
@@ -96,36 +96,35 @@ export default {
           }
       },
       formatDate (old) {
+        console.log('iz baze: ' + old)
         let date = this.sqlToJsDate(old)
-      let year = date.getFullYear().toString().substring(2,4)
-      let month = date.getMonth() + 1
-      let day = date.getDay()
-      let hour = date.getHours()
-      let minute = date.getMinutes()
-
-      if(minute < 10) minute = '0' + minute
-      if(hour < 10) hour = '0' + hour
-      if(month < 10) month = '0' + month
-      if(day < 10) day = '0' + day
+        console.log(date)
+        date = date.toLocaleString('en-GB', {year: '2-digit',
+        day: '2-digit',
+        month: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'})
 
 
-      let output = day + '/' + month + '/' + year
-        + ' ' + hour + ':' + minute
-       return output
+        return date
   },
   sqlToJsDate (sqlDate){
 	var sqlDateArr1 = sqlDate.split("-");
 	var sYear = sqlDateArr1[0];
-	var sMonth = (Number(sqlDateArr1[1]) - 1).toString();
+	var sMonth = (Number(sqlDateArr1[1])).toString()
 	var sqlDateArr2 = sqlDateArr1[2].split(" ");
 	var sDay = sqlDateArr2[0];
 	var sqlDateArr3 = sqlDateArr2[1].split(":");
 	var sHour = sqlDateArr3[0];
 	var sMinute = sqlDateArr3[1];
 	var sqlDateArr4 = sqlDateArr3[2].split(".");
-	var sSecond = sqlDateArr4[0];
-    var sMillisecond = sqlDateArr4[1]; 
-    return new Date(sYear,sMonth,sDay,sHour,sMinute,sSecond,sMillisecond);
+    var sSecond = sqlDateArr4[0];
+
+    if(sMonth < 10) sMonth = '0' + sMonth
+
+    let dateStr = sYear + '-' + sMonth + '-' + sDay + 'T' + sHour + ':' + sMinute + ':' + sSecond + 'Z'
+    console.log(dateStr)
+    return new Date(dateStr);
     },
     async getUsers () {
         this.$route.query.count = this.pageSize
@@ -162,6 +161,10 @@ export default {
       height: 20px;
   }
   .username {
+
+  }
+
+  .date {
 
   }
 

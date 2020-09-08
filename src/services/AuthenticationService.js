@@ -11,7 +11,12 @@ export default {
     return Api().post('register', data)
   },
   automaticLogIn (data) {
-    console.log('saljem token')
     return Api().post('automaticLogin', data)
+  },
+  sendRecoveryEmail (data) {
+    return Api().post('recovery', data)
+  },
+  updatePass (data) {
+    return Api().post('updatePass', data)
   }
 }

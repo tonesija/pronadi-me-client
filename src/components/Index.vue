@@ -8,18 +8,6 @@
       </p>
 
 
-    <button @click="showAdminTools">Show admin tools</button>
-    <div v-if="adminToolsEnabled">
-      <h3>Admin actions</h3>
-      <input type="text" placeholder="egg name" v-model="newEggName">
-      <br>
-      <input type="text" placeholder="egg code" v-model="newEggCode">
-      <br>
-            <input type="text" placeholder="egg hint" v-model="newEggHint">
-      <br>
-
-      <button @click="createNewEgg">Create</button> 
-    </div>
     
 
 
@@ -29,8 +17,6 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
-import Api from '@/services/Api' 
-
 
 export default {
   data () {
@@ -40,8 +26,7 @@ export default {
       newEggHint: null,
       username: null,
       password: null,
-      error: null,
-      adminToolsEnabled: false
+      error: null
     }
   }, 
   components: {
@@ -60,13 +45,7 @@ export default {
               this.error = err.response.data.error
           }
           
-      },
-      createNewEgg () {
-        Api().post('createNewEgg', {name: this.newEggName, password: this.newEggCode, hint: this.newEggHint})
-    },
-    showAdminTools () {
-      this.adminToolsEnabled = !this.adminToolsEnabled
-    }
+      }
   }
 }
 </script>

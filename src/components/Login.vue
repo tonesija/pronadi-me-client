@@ -20,6 +20,9 @@
         <router-link v-if="eggCode" :to="'/register/?code=' + eggCode">Registriraj se</router-link>
         <router-link v-if="!eggCode" to="/register">Registriraj se</router-link>
       </p>
+      <p class="text">
+        <router-link to="/recovery">Zaboravili ste lozinku?</router-link>
+      </p>
 
     </div>
     
