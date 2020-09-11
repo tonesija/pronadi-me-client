@@ -5,15 +5,18 @@
 
         <input class="input" type="username" 
         v-model="username" 
-        placeholder="korisničko ime">
+        placeholder="korisničko ime"
+        v-on:keyup.enter="register">
         <br>
         <input class="input" type="email" 
         v-model="email" 
-        placeholder="email">
+        placeholder="email"
+        v-on:keyup.enter="register">
         <br>
         <input class="input" type="password" 
         v-model="password" 
-        placeholder="lozinka">
+        placeholder="lozinka"
+        v-on:keyup.enter="register">
         <br>
         
         <button class="button" @click="register">Pošalji</button>

@@ -8,11 +8,13 @@
 
       <input class="input" type="username" 
       v-model="username" 
-      placeholder="korisničko ime ili email">
+      placeholder="korisničko ime ili email"
+      v-on:keyup.enter="sendLoginWithEgg">
       <br>
       <input class="input" type="password" 
       v-model="password" 
-      placeholder="lozinka">
+      placeholder="lozinka"
+      v-on:keyup.enter="sendLoginWithEgg">
       <br>
       <button class="button" @click="sendLoginWithEgg">Pošalji</button>
       

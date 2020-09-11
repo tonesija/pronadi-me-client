@@ -49,7 +49,7 @@ export default {
 
       //dodaj finding u bazu
       await FindingService.addFinding({userID: this.$store.state.user.id,
-           eggID: this.egg.id, token: this.$store.state.token})
+           eggCode: this.egg.password, token: this.$store.state.token})
       this.loaded = true
     } catch (err) {
       this.error = err.response.data.error
