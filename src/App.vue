@@ -76,7 +76,6 @@ body {
   background-image: url('./assets/bg-for-text2.png');
   background-position-x: center;
   background-size: 180%;
-  //background-color: darken($color: $secondary, $amount: 2);
   margin-left: 0; 
   margin-right: 0;
 }
@@ -117,6 +116,7 @@ body {
 }
 
   .button{
+    //display: inline-block;
     outline: none;
     font-family: $sans-serif-font;
     font-size: 18px;
@@ -128,7 +128,7 @@ body {
     border: none;
   }
     .button:focus{
-    opacity: 50%;
+    opacity: 0.5 !important;
   }
   .input {
     font-family: $sans-serif-font;

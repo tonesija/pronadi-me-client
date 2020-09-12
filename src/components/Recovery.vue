@@ -32,6 +32,8 @@ export default {
   },
   methods: {
       async sendMail () {
+        this.error = null
+        this.message = null
 
           try {
               this.message = (await AuthenticationService.sendRecoveryEmail({

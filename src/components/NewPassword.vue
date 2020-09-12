@@ -39,6 +39,7 @@ export default {
   methods: {
       async storeNewPass () {
         this.error = null
+        this.message = null
           if(this.newPass != this.confirmPass){
               this.error = 'Lozinke nisu jednake.'
               this.newPass = ''
@@ -53,6 +54,11 @@ export default {
                 newPass: this.newPass,
                 token: this.$route.query.token
               })).data.message
+
+              setTimeout(() => {
+                this.$router.push('/login')
+              }, 1000)
+              
           } catch (err) {
               this.error = err.response.data.error
           }
