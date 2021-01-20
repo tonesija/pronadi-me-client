@@ -4,11 +4,10 @@
 
       <h1 class="title">PRONAĐI ME</h1>
       <p class="text">
-      Lorem ipsum dolor sit amet consectetur, adipisicing elor sit amet consectetur, adipisicing elit. Offor sit amet consectetur, adipisicing elit. Offor sit amet consectetur, adipisicipisicing elit. Offit. Officiis, corrupti! Sapiente nihil possimus consequuntur porro dolores fugit error vitae nobis autem cupiditate quisquam, sit deleniti perspiciatis, inventore maiores delectus atque!
+        Dobrodošli na Pronadi.me! Pronađi me je <i>treasure hunt</i> igra u kojoj
+        je cilj pronaći QR kodove i skenirati ih!
+        Da Vam olakšamo, dajemo Vam prvi QR kod!
       </p>
-
-
-    
 
 
   </div>
